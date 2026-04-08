@@ -1,0 +1,48 @@
+.fighters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.fighter-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fighter-card h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.fighter-card p {
+    color: #666;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+.footer {
+    background: #333333;
+    color:  #ffffff;
+    padding: 15px 0;
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer p {
+    margin: 5px 0;
+}
