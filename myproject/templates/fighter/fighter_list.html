@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Fighter list
+Fighter list
 {% endblock %}
 
 {% block main %}
@@ -14,25 +14,69 @@
 
 <div class="fighters">
     {% for fighter in fighter %}
-        <div class="fighter-card" style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
+    <div class="fighter-card" style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
 
 
-            <form action="{% url 'fighter_delete' fighter.id %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+        <form action="{% url 'fighter_delete' fighter.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
 
-            <a href="{% url 'fighter_update' fighter.id %}">
-                <button class="btn btn-warning">Update</button>
-            </a>
+        <a href="{% url 'fighter_update' fighter.id %}">
+            <button class="btn btn-warning">Update</button>
+        </a>
 
 
-            <h2>{{ fighter.name }} ({{ fighter.nickname }})</h2>
-            <p>Weight Class: {{ fighter.weight_class }}</p>
-            <p>Record: {{ fighter.wins }}W - {{ fighter.losses }}L</p>
+        <h2>{{ fighter.name }} ({{ fighter.nickname }})</h2>
+        <p>Weight Class: {{ fighter.weight_class }}</p>
+        <p>Record: {{ fighter.wins }}W - {{ fighter.losses }}L</p>
 
-        </div>
+    </div>
     {% endfor %}
 </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
 
+        {% if fighter.has_previous %}
+        <li class="page-item">
+            <a class="page-link"
+               href="?page={{ fighter.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">
+                Previous
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        {% endif %}
+
+        {% for num in fighter.paginator.page_range %}
+        {% if fighter.number == num %}
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}">
+                {{ num }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% if fighter.has_next %}
+        <li class="page-item">
+            <a class="page-link"
+               href="?page={{ fighter.next_page_number }}{% if search %}&search={{ search }}{% endif %}">
+                Next
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
 {% endblock %}

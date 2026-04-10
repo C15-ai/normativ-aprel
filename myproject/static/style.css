@@ -46,3 +46,7 @@ body {
 .footer p {
     margin: 5px 0;
 }
+
+.navbar-nav .nav-link:hover {
+    color: #f0a500 !important;
+}

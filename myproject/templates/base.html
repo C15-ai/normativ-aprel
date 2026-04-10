@@ -26,20 +26,59 @@
     </style>
 </head>
 <body>
-    <header>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">UFC Fighters</a>
 
-    </header>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <main>
-        {% block main %}{% endblock %}
-    </main>
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-    <footer class="footer bg-dark text-light mt-5 py-3">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/fighters/">Fighters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/fighters/">Fight List</a>
+                    </li>
+                </ul>
+
+
+                <form class="d-flex ms-3" method="get" aria-label="Search" name="search">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        aria-label="Search"
+                        name="search"
+                        placeholder="Search fighters..."
+                        value={{search}}
+                    >
+                    <button class="btn btn-outline-warning" type="submit">
+                        Search
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    {% block main %}{% endblock %}
+</main>
+
+<footer class="footer bg-dark text-light mt-5 py-3">
     <div class="container text-center">
         <p class="mb-1">📧 info@ufcfighters.com | 📞 +998 90 123 45 67</p>
         <p class="mb-0">© 2026 UFC Fighters</p>
     </div>
-    </footer>
+</footer>
 
 </body>
 </html>
