@@ -9,7 +9,7 @@ def fighter_list(request):
     page_number = request.GET.get('page')
     print(page_number)
     # print(search)
-    fighter = Fighter.objects.all()
+    fighter = Fighter.objects.filter()
     if search:
         fighter = fighter.filter(Q(name__icontains=search) | Q(nickname__icontains=search) | Q(weight_class__icontains=search))
     paginator = Paginator(fighter,3)
@@ -43,7 +43,7 @@ def fighter_update(request,pk=None):
     return render(request, 'fighter/update_fighters.html',{'form':form, 'fighter':fighter})
 
 def fighter_delete(request, pk=None):
-    Fighter.objects.filter(id=pk).delete()
+    Fighter.objects.filter(id=pk).update(is_active=False)
     return redirect('fighter_list')
 
 

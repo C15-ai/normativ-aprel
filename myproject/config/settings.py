@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # project_1
-    'ufc_fighters'
+    'ufc_fighters',
+
+    # common
+    'common',
+
 ]
 
 MIDDLEWARE = [
