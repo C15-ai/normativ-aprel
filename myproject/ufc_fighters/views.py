@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
 from .models import Fighter
 from .forms import FighterForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+@login_required(login_url=reverse_lazy('login'))
 def fighter_list(request):
     search = request.GET.get('search', '')
     page_number = request.GET.get('page')
@@ -19,7 +23,7 @@ def fighter_list(request):
     return render(request, 'fighter/fighter_list.html',{'fighter':fighter , 'search' : search})
 
 
-
+@login_required(login_url=reverse_lazy('/accounts/login'))
 def fighter_create(request):
     if request.method == "POST":
         form = FighterForm(request.POST)
@@ -29,11 +33,13 @@ def fighter_create(request):
     else:
         form = FighterForm()
     return render(request, 'fighter/create_fighters.html', {'form': form})
+@login_required(login_url=reverse_lazy('login'))
 def fighter_update_form(request,pk=None):
     fighter = Fighter.objects.filter(id=pk).first()
     form = FighterForm(instance=fighter)
     return render(request, 'fighter/update_fighters.html',{'form':form, 'fighter':fighter , })
 
+@login_required(login_url=reverse_lazy('login'))
 def fighter_update(request,pk=None):
     fighter = Fighter.objects.filter(id=pk).first()
     form = FighterForm(instance=fighter,data=request.POST)
@@ -41,7 +47,7 @@ def fighter_update(request,pk=None):
         form.save()
         return redirect('fighter_list')
     return render(request, 'fighter/update_fighters.html',{'form':form, 'fighter':fighter})
-
+@login_required(login_url=reverse_lazy('login'))
 def fighter_delete(request, pk=None):
     Fighter.objects.filter(id=pk).update(is_active=False)
     return redirect('fighter_list')

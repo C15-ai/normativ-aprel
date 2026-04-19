@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}.
-    <h1>Book Edit</h1>
+    <h1>Fighter Edit</h1>
     <form method="post" action="{% url 'fighter_update' fighter.id %}">
         {% csrf_token %}
         {#        <label for="name">Fighter Name:</label>#}
