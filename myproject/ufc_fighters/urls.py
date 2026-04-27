@@ -6,5 +6,5 @@ urlpatterns = [
     path('fighters/create/', views.fighter_create, name='fighter_create'),
     path('fighters/<int:pk>/edit/', views.fighter_update, name='fighter_update'),
     path('fighters/<int:pk>/delete/', views.fighter_delete, name='fighter_delete'),
-
+    path('logout/', views.logout_view, name='logout'),
 ]

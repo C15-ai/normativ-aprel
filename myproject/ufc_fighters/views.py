@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -7,7 +8,7 @@ from .models import Fighter
 from .forms import FighterForm
 from django.db.models import Q
 from django.core.paginator import Paginator
-@login_required(login_url=reverse_lazy('login'))
+
 def fighter_list(request):
     search = request.GET.get('search', '')
     page_number = request.GET.get('page')
@@ -52,5 +53,7 @@ def fighter_delete(request, pk=None):
     Fighter.objects.filter(id=pk).update(is_active=False)
     return redirect('fighter_list')
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 

@@ -8,15 +8,21 @@ Fighter list
 
 <h1>🥊 UFC Fighters List</h1>
 
+{% if request.user.is_authenticated %}
 <a href="{% url 'fighter_create' %}">
     <button class="btn btn-primary">Create</button>
 </a>
+{% endif %}
 
 <div class="fighters">
     {% for fighter in fighter %}
     <div class="fighter-card" style="margin-bottom:20px; border:1px solid #ccc; padding:10px;">
 
+        <h2>{{ fighter.name }} ({{ fighter.nickname }})</h2>
+        <p>Weight Class: {{ fighter.weight_class }}</p>
+        <p>Record: {{ fighter.wins }}W - {{ fighter.losses }}L</p>
 
+        {% if request.user.is_authenticated %}
         <form action="{% url 'fighter_delete' fighter.id %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Delete</button>
@@ -25,15 +31,12 @@ Fighter list
         <a href="{% url 'fighter_update' fighter.id %}">
             <button class="btn btn-warning">Update</button>
         </a>
-
-
-        <h2>{{ fighter.name }} ({{ fighter.nickname }})</h2>
-        <p>Weight Class: {{ fighter.weight_class }}</p>
-        <p>Record: {{ fighter.wins }}W - {{ fighter.losses }}L</p>
+        {% endif %}
 
     </div>
     {% endfor %}
 </div>
+
 <nav aria-label="Page navigation">
     <ul class="pagination">
 
@@ -79,4 +82,5 @@ Fighter list
 
     </ul>
 </nav>
+
 {% endblock %}
